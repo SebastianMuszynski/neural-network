@@ -1,4 +1,4 @@
-from activations.sigmoid import Sigmoid
+from fn_activations.sigmoid import Sigmoid
 
 
 class Tanh:
