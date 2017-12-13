@@ -7,32 +7,32 @@ class CrossEntropyCost:
         return np.sum(np.nan_to_num(-y * np.log(a) - (1 - y) * np.log(1 - a)))
 
     @staticmethod
-    def fn_d(y, a):
+    def fn_d(y, a, z, a_fn):
         return a - y
 
 
 """
     Cross entropy function derivative with respect to weights:
 
-     df     -y                          1 - y
-     --  =  --- * activation_fn'(z) - ------- * - activation_fn'(z) =
-     dw      a                          1 - a
+     df     -y                1 - y
+     --  =  --- * a_fn'(z) - ------- * - a_fn'(z) =
+     dw      a                1 - a
     
-             -y                         1 - y
-         =  --- * activation_fn'(z) + ------- * activation_fn'(z) = 
-             a                          1 - a
+            -y                1 - y
+         =  --- * a_fn'(z) + ------- * a_fn'(z) = 
+             a                1 - a
     
              -y     1 - y                      
-         = ( --- + ------- ) * activation_fn'(z) = 
+         = ( --- + ------- ) * a_fn'(z) = 
               a     1 - a
     
             -y + ya + a - ya                      
-         = ------------------ * activation_fn'(z) = 
+         = ------------------ * a_fn'(z) = 
               a * (1 - a)
     
-                  a - y                      
-         =  ------------------- * activation_fn'(z) = 
-             activation_fn'(z)
+              a - y                      
+         =  ---------- * a_fn'(z) = 
+             a_fn'(z)
     
          =  a - y
 """
